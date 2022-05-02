@@ -1,2 +1,2 @@
 # todoList
-Creating todo's and listing them
+Creating todo's and listing them using useState Hooks
