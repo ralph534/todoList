@@ -1,2 +1,2 @@
 # todoList
-Creating todo's and listing them using useState Hooks
+Creating todo's and listing them using Reacts {useState} Hooks
