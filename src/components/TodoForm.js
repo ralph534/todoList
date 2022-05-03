@@ -14,7 +14,7 @@ function TodoForm(props) {
 ///  given setInput as the second param in the usestate to target the value in the 
 ////  input field
   const inputChanger = (e) => {
-      setInput(e.target.value);
+      setInput(e.target.value)
   }
 
   
