@@ -1,7 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 
 function TodoForm(props) {
   const [input, setInput] = useState('');
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+      inputRef.current.focus()
+  })
 
 ///  This function is to make changes in a specifc area in the App (FORM) tag
 ///   without refreshing the whole web browser
@@ -27,7 +32,13 @@ function TodoForm(props) {
   return (
     <div>
          <form className='todo-form' onSubmit={handleSubmit}>
-             <input type='text' placeholder='WHAT TO DO?' value={input} name='print' className='todo-input' onChange={inputChanger} />
+             <input type='text' 
+                    placeholder='WHAT TO DO?'
+                    value={input} 
+                    name='text' 
+                    className='todo-input' 
+                    onChange={inputChanger} 
+                    ref={inputRef}/>
              <button className='todo-button'>ADD TODO</button>
 
          </form>
