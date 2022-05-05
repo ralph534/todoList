@@ -6,35 +6,53 @@ import Todo from './Todo'
 function TodoList() {
     const [todos, setTodos] = useState([])
 
+///////////////////////////////////////////////////////
+
     const addTodo = (todo) => {
      if(!todo.text || /^\s*$/.test(todo.text)) {
          return
      }
-    const newTodos = [todo, ...todos]
-    setTodos(newTodos)
+   const newTodo = [todo, ...todos]
+   setTodos(newTodo)
     }
 
-    ///  
+
+    const updateTodo = (todoId, newValue) => {
+        if(!newValue.text || /^\s*$/.test(newValue.text)) {
+            return
+        }
+        setTodos(prev => prev.map(updated => (updated.id === todoId ? newValue : updated))
+        )
+    }
+    
+////////////////////////////////////////////////////////////// 
     const removeTodo = id => {
         let removal = [...todos].filter(todo => todo.id !== id);
         setTodos(removal)
 }
 
+
+
+////////////////////////////////////////////////
+
     const completeTodo = id => {
-        let updatedTodos = todos.map(updated => {
-            if(updated.id===id) {
-               updated.isComplete = !updated.isComplete
+        let completedTodos = [...todos].map(completed => {
+            if(completed.id===id) {
+               completed.isComplete = !completed.isComplete
+               console.log(completedTodos)
             }
-            return updated
+            return completed
         })
-        setTodos(updatedTodos)
+        setTodos(completedTodos)
     }
+
+
 
     return (
        <div>
             <h3>What's On The Agenda For Today?</h3>
             <TodoForm onSubmit={addTodo}/>
-            <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo}/>
+            <Todo todos={todos} completeTodo={completeTodo} removeTodo={removeTodo} updateTodo={updateTodo}/>
        </div>
     )
 }

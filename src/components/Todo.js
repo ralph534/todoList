@@ -1,17 +1,29 @@
 import React, {useState} from 'react'
 import {BsFillTrashFill} from 'react-icons/bs'
 import {AiOutlineEdit} from 'react-icons/ai'
+import TodoForm from './TodoForm'
 
 
-function Todo({todos, completeTodo, removeTodo}) {
+function Todo({todos, completeTodo, removeTodo, updateTodo}) {
 const [edit, setEdit] = useState({
     id: null,
     value: ''
 })
 
-  return todos.map((todo, index) => (
-    <div className={todo.isCompplete ? 'todo-row complete' : 'todo-row'} key={index}>
-        <div key={todo.id} onClick={() => completeTodo(todo.id)}>
+const submitUpdate = value => {
+    updateTodo(edit.id, value)
+    setEdit({
+        id: null,
+        value: ''
+    })
+}
+if (edit.id) {
+    return <TodoForm edit={edit} onSubmit={submitUpdate} />  
+}
+
+  return todos.map((todo, unique) => (
+    <div className='todo-list' key={unique}>
+        <div  onClick={completeTodo}>
             {todo.text}
         </div>
         <div className='Icon'>
