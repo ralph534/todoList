@@ -22,11 +22,11 @@ if (edit.id) {
 }
 
   return todos.map((todo, unique) => (
-    <div className='todo-list' key={unique}>
-        <div  onClick={completeTodo}>
+<div className={todo.isComplete ? 'todo-row complete' : 'todo-row'} key={unique}>
+    <div className='todo-list' key={unique} onClick={() => completeTodo(todo.id)}>
             {todo.text}
         </div>
-        <div className='Icon'>
+        <div className='icons'>
         <BsFillTrashFill className='delete-button' onClick={() => removeTodo(todo.id)}/>
         <AiOutlineEdit className='edit-button' onClick={() => setEdit({
             id: todo.id,
@@ -34,6 +34,7 @@ if (edit.id) {
             })}/>
         </div>
     </div>
+
       )
     )
   }

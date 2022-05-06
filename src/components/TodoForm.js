@@ -1,9 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react'
 
 function TodoForm(props) {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(props.edit ? props.edit.value :
+    '');
   const inputRef = useRef(null)
 
+  /// input field ready for text upon refresh or onclick
   useEffect(() => {
       inputRef.current.focus()
   })
@@ -30,20 +32,36 @@ function TodoForm(props) {
 
   
   return (
-    <div>
          <form className='todo-form' onSubmit={handleSubmit}>
+             {props.edit ? (
+                 <>
              <input type='text' 
-                    placeholder='WHAT TO DO?'
+                    placeholder='Updating Task?'
                     value={input} 
                     name='text' 
                     className='todo-input' 
                     onChange={inputChanger} 
                     ref={inputRef}/>
-             <button className='todo-button'>ADD TODO</button>
+             <button className='todo-button'>Update</button>
+             </>
+             )
+              :
+             (
+                 <>
+                 <input type='text' 
+             placeholder='WHAT TO DO?'
+             value={input} 
+             name='text' 
+             className='todo-input' 
+             onChange={inputChanger} 
+             ref={inputRef}/>
+      <button className='todo-button'>ADD TODO</button>
+      </>
+      )
+             }
 
          </form>
-    </div>
-  )
+  );
 }
 
 export default TodoForm
